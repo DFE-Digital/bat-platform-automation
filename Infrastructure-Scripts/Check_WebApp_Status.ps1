@@ -1,16 +1,11 @@
 ﻿[CmdletBinding()]
-
 Param(
-
- # [Parameter(Mandatory=$True)]
-  
-  [string] $appservicename="bat-prod-mcfe-as",
-  [int]$timeoutInMinutes = 5
+    [Parameter(Mandatory=$True)]
+    [string] $appservicename,
+    [int]$timeoutInMinutes = 5
   )
 
-
 try{
-
     #Get Web app properties
     $webApp = Get-AzureRmWebApp -Name $appservicename
 
@@ -36,10 +31,8 @@ try{
         #do while loop terminates only if webapp are up and reachable or when timeout is reached
         While ($continue)
         {
-
             foreach ($uri in $uris)
             {
-
                 $webrequest = try{ 
  
                     $request = $null 
@@ -91,15 +84,24 @@ try{
           write-output "Elapsed:$($elapsedTime.ToString("hh\:mm\:ss"))"  
 
           #Handle event
-          if($elapsedTime.Minutes -ge $timeoutInMinutes ){$continue = $false}
-          elseif($sleeprequired -eq $false)
-          { $continue = $false
+          if($elapsedTime.Minutes -ge $timeoutInMinutes )
+            {
+                # Exit do while loop if timeout is reached
+                $continue = $false
             }
-          else{
+          elseif($sleeprequired -eq $false)
+            {   
+                # Exit do while loop if web apps are running  
+                $continue = $false
+            }
+          else
+            {
                 write-output "Sleeping 10s" 
-                Start-Sleep 10} 
+                Start-Sleep 10
+            } 
         }
-    }else{
+    }else
+    {
 
         Write-Output "Web App not found"
     }
