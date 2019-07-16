@@ -5,9 +5,6 @@ PowerShell helper scripts to be used locally and in Azure Pipelines for the Beco
 - Code layout and formatting guidance.
 - Writing Pester tests and using PSScriptAnalyzer to ensure best practise.
 
-|Build Status|
-|-|
-|[![Build Status](https://dev.azure.com/sfa-gov-uk/Apprenticeships%20Service%20Cloud%20Platform/_apis/build/status/das-platform-automation?branchName=master)](https://dev.azure.com/sfa-gov-uk/Apprenticeships%20Service%20Cloud%20Platform/_build/latest?definitionId=1538&branchName=master)|
 
 ## Contents
 
